@@ -1,0 +1,14 @@
+# Ignore Specific folders
+temp/
+
+# Vscode 
+.vscode/
+
+#Mac 
+.DS_Store
+
+# Python
+__pycache__/
+
+# Env files 
+.env
