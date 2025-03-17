@@ -27,7 +27,7 @@ class MainWindow(QMainWindow):
         self.stored_med_cal_min = None
         self.stored_med_cal_max = None
 
-        self.serial_connection = Mbed_Connection(use_dummy=True)
+        self.serial_connection = Mbed_Connection(use_dummy=False) # dummy serial class for windows dev / testing set to false if connected
 
         self.widget = QWidget()
         self.layout = QVBoxLayout(self.widget) # why is this not self
@@ -150,7 +150,7 @@ class MainWindow(QMainWindow):
     def store_min(self):
         if self.sent_inputs:
             self.stored_min = self.inputs_widget.collect_inputs_as_string()
-            self.logger.write_calibration(self.stored_max, self.calibration_counter)
+            self.logger.write_calibration(self.stored_min, self.calibration_counter)
             self.send_prev_min_button.setEnabled(True)
         else:
             self.text_area.append("Error: No inputs have been sent yet!")

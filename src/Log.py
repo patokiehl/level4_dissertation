@@ -13,7 +13,7 @@ class Logger:
         parsed_message = message.split('|')
         parsed_message = [value.split(':', 1)[1] for value in parsed_message]
         with open(self.calibration_filepath, "a") as f:
-            f.write(f"{timestamp},{','.join(parsed_message)}, {calibration_counter}\n")
+            f.write(f"{timestamp},{','.join(parsed_message)},{calibration_counter}\n")
 
 
 
