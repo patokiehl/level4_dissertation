@@ -22,38 +22,40 @@ class MainWindow(QMainWindow):
         self.sent_inputs = False
         self.stored_max = None
         self.stored_min = None
+        self.calibration_counter = 0 
 
         self.stored_med_cal_min = None
         self.stored_med_cal_max = None
 
         self.serial_connection = Mbed_Connection(use_dummy=True)
 
-        widget = QWidget()
-        layout = QVBoxLayout(widget)
+        self.widget = QWidget()
+        self.layout = QVBoxLayout(self.widget) # why is this not self
+        self.layout.setSpacing(15)
 
         self.port_combo = QComboBox()
         self.refresh_ports()
-        layout.addWidget(QLabel("Select Serial Port:"))
-        layout.addWidget(self.port_combo)
+        self.layout.addWidget(QLabel("Select Serial Port:"))
+        self.layout.addWidget(self.port_combo)
 
         # Inputs layout
         self.inputs_widget = InputsWidget()
-        layout.addWidget(self.inputs_widget)
+        self.layout.addWidget(self.inputs_widget)
 
         # Connect / Disconnect button
         self.connect_button = QPushButton("Connect")
         self.connect_button.clicked.connect(self.handle_connect)
-        layout.addWidget(self.connect_button)
+        self.layout.addWidget(self.connect_button)
 
         # Send data button
         self.send_button = QPushButton("Send Inputs")
         self.send_button.clicked.connect(self.send_inputs)
         self.send_button.setEnabled(False) 
-        layout.addWidget(self.send_button)
+        self.layout.addWidget(self.send_button)
 
         # Max and min Buttons 
         max_min_layout = QHBoxLayout()
-        layout.addLayout(max_min_layout)
+        self.layout.addLayout(max_min_layout)
 
         self.store_max_button = QPushButton("Store Max")
         self.store_max_button.clicked.connect(self.store_max)
@@ -76,18 +78,24 @@ class MainWindow(QMainWindow):
         self.send_prev_min_button.setEnabled(False) 
         max_min_layout.addWidget(self.send_prev_min_button)
 
+        # Upate calibration session 
+        self.update_calibration_button = QPushButton(f'Update calibration, current count: {self.calibration_counter}')
+        self.update_calibration_button.clicked.connect(self.update_calibration)
+        self.layout.addWidget(self.update_calibration_button)
+
+
         # calibration saves layout 
         calibration_layout = QHBoxLayout()
-        layout.addLayout(calibration_layout)
+        self.layout.addLayout(calibration_layout)
 
         self.stored_med_cal_min_button = QPushButton("Store Meditation Calibration Min")
 
         # Text area to show output
         self.text_area = QTextEdit()
         self.text_area.setReadOnly(True)
-        layout.addWidget(self.text_area)
+        self.layout.addWidget(self.text_area)
 
-        self.setCentralWidget(widget)
+        self.setCentralWidget(self.widget)
 
     def refresh_ports(self):
         self.port_combo.clear()
@@ -119,7 +127,7 @@ class MainWindow(QMainWindow):
         final_string = self.inputs_widget.collect_inputs_as_string()
         self.serial_connection.write_string(final_string+"\n")
         self.text_area.append(f"Sent: {final_string}")
-        self.logger.write_raw(final_string)
+        self.logger.write_raw(final_string, self.calibration_counter)
         self.sent_inputs = True
         self.store_max_button.setEnabled(True)
         self.store_min_button.setEnabled(True)
@@ -127,7 +135,7 @@ class MainWindow(QMainWindow):
     def store_max(self):
         if self.sent_inputs:
             self.stored_max = self.inputs_widget.collect_inputs_as_string()
-            self.logger.write_calibration(self.stored_max)
+            self.logger.write_calibration(self.stored_max, self.calibration_counter)
             self.send_prev_max_button.setEnabled(True)
         else:
             self.text_area.append("Error: No inputs have been sent yet!")
@@ -142,7 +150,7 @@ class MainWindow(QMainWindow):
     def store_min(self):
         if self.sent_inputs:
             self.stored_min = self.inputs_widget.collect_inputs_as_string()
-            self.logger.write_calibration(self.stored_max)
+            self.logger.write_calibration(self.stored_max, self.calibration_counter)
             self.send_prev_min_button.setEnabled(True)
         else:
             self.text_area.append("Error: No inputs have been sent yet!")
@@ -158,19 +166,8 @@ class MainWindow(QMainWindow):
         self.serial_connection.close()
         event.accept()
 
-def run_gui():
-    app = QApplication(sys.argv)
-    user_id, ok = QInputDialog.getText(None, "User ID", "Enter your Participant ID:")
-    if ok and user_id.strip():
-        window = MainWindow(user_id)
-        window.show()
-        sys.exit(app.exec())
-    else:
-        sys.exit() 
 
-
-
-if __name__ == "__main__":
-    run_gui()
-
+    def update_calibration(self):
+        self.calibration_counter +=1
+        self.update_calibration_button.setText(f'Update calibration, current count: {self.calibration_counter}')
 

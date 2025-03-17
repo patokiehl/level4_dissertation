@@ -14,6 +14,8 @@ class MetaPage(QMainWindow):
         self.central_widget = QWidget()
         self.setCentralWidget(self.central_widget)
         self.layout = QVBoxLayout(self.central_widget)
+        self.layout.setContentsMargins(20, 20, 20, 20)
+        self.layout.setSpacing(15)
         
         # USERID input
         self.userid_label = QLabel('USERID:')
@@ -59,19 +61,22 @@ class MetaPage(QMainWindow):
 
         # Manaul Labour - does this have an effect 
         self.manual_layout = QVBoxLayout()
-        self.manual_layout.addWidget(QLabel('Would you say that your occupation generally requires a lot of manual labour? do you often work with your hands:'))
+        self.manual_layout.addWidget(QLabel('How many hours a day do you work in a manual labour sense?:'))
 
         self.manual_layout_buttons = QHBoxLayout()
-        self.yes_manual = QRadioButton('Yes')
-        self.no_manual = QRadioButton('No') 
-        self.other_manual = QRadioButton('other')
+        self.manual_0_1 = QRadioButton('0-1')
+        self.manual_1_3 = QRadioButton('1-3')
+        self.manual_3_6 = QRadioButton('3-6') 
+        self.manual_6_plus = QRadioButton('6+')
         self.manual_group = QButtonGroup(self)
-        self.manual_group.addButton(self.yes_manual)
-        self.manual_group.addButton(self.no_manual)
-        self.manual_group.addButton(self.other_manual)
-        self.manual_layout_buttons.addWidget(self.yes_manual)
-        self.manual_layout_buttons.addWidget(self.no_manual)
-        self.manual_layout_buttons.addWidget(self.other_manual)
+        self.manual_group.addButton(self.manual_0_1)
+        self.manual_group.addButton(self.manual_1_3)
+        self.manual_group.addButton(self.manual_3_6)
+        self.manual_group.addButton(self.manual_6_plus)
+        self.manual_layout_buttons.addWidget(self.manual_0_1)
+        self.manual_layout_buttons.addWidget(self.manual_1_3)
+        self.manual_layout_buttons.addWidget(self.manual_3_6)
+        self.manual_layout_buttons.addWidget(self.manual_6_plus)
 
         self.manual_layout.addLayout(self.manual_layout_buttons)
         self.layout.addLayout(self.manual_layout)
@@ -98,10 +103,6 @@ class MetaPage(QMainWindow):
         selected_age = self.age_group.checkedButton()
         age_range = selected_age.text() if selected_age else QMessageBox.warning(self, 'Input Error', 'Please select an age range')
 
-        print('Temperature:', temperature)
-        print('manual:', manual)
-        print('Age Range:', age_range)
-        print('Gender:', gender)
         self.Logger = Logger(userid)
         self.Logger.write_meta(userid, age_range, gender, temperature, manual)
         self.on_submit(userid)

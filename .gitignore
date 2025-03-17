@@ -9,6 +9,7 @@ temp/
 
 # Python
 __pycache__/
+dissCODE/*
 
 # Env files 
 .env
