@@ -158,7 +158,7 @@ class MainWindow(QMainWindow):
     def send_prev_min(self):
         if self.stored_min:
             self.serial_connection.write_string(self.stored_min + "\n")
-            self.text_area.append(f"Sent Previous Max: {self.stored_min}")
+            self.text_area.append(f"Sent Previous Min: {self.stored_min}")
         else:
             self.text_area.append("No min value stored yet.")
 

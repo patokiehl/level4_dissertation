@@ -4,7 +4,7 @@ class Logger:
     def __init__(self, user_ID):
         
         self.user_id = user_ID
-        self.user_dir = os.path.join('data', user_ID) 
+        self.user_dir = os.path.join('data', f'participant{user_ID}') 
         os.makedirs(self.user_dir, exist_ok=True)
 
     def write_raw(self, message, calibration_counter):
