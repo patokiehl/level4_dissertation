@@ -1,11 +1,11 @@
 # September 2024 
 
 ## Week 1 (September 1 - September 7)
-
+- inital setup and meetings with stephen
 ## Week 2 (September 8 - September 14)
-
+- meeting with Paddy and getting the mbed
 ## Week 3 (September 15 - September 21)
-
+- meeting with shaun and getting the 
 ## Week 4 (September 22 - September 30)
 
 
