@@ -1,0 +1,93 @@
+    
+\documentclass[11pt]{article}
+\usepackage{times}
+    \usepackage{fullpage}
+    
+\title{Investigating how changes in electrodermal activity affect the perception of electrotactile stimulation}
+
+    \author{Patrick Kiehlmann - 2623719k}
+
+    \begin{document}
+    \maketitle
+    
+    
+    
+\section{Status report}
+
+\subsection{Proposal}\label{proposal}
+
+\subsubsection{Motivation}\label{motivation}
+Electrotactile feedback is a new and interesting form of haptic feedback that removes the need for vibration motors and allows for more localised feedback forms. We can use electric pulses with varying amplitudes and pulse frequencies to provide feedback to a user. A person's galvanic skin response (GSR) is the variation in the skin's electrical conductance in response to changes in physiological states, such as stress or arousal. This project aims to investigate how skin conductivity influences electrotactile interactions and how we can adjust the feedback to ensure that users experience consistent perceptual feedback, regardless of changes in their skin conductivity.
+
+
+\subsubsection{Aims}\label{aims}
+This project aims to analyze the relationship between skin conductivity (measured via Electrodermal Activity, EDA) and the intensity of electrotactile feedback. A Bitalino device (Bitalino (r)evolution Core (assembled)) will be used to measure the user's EDA, providing real-time data on skin conductivity. This data will be combined with an ARM mbed LPC1768 microcontroller and custom hardware to deliver varying levels of electrotactile feedback. The project will conduct a series of experiments in which users' EDA will be continuously monitored, and their feedback on the intensity of the electrotactile sensations will be collected.
+
+\subsection{Progress}\label{progress}
+
+\begin{itemize}
+    \item Configured the Bitalino system to record Electrodermal Activity (EDA) from users.
+    \item Conducted preliminary background research on the relationship between skin conductivity and electrotactile feedback.
+    \item Developed an initial outline for the experimental procedure.
+    \item Implemented a basic feedback system utilizing a combination of Python and C++.
+\end{itemize}
+
+
+
+\subsection{Problems and risks}\label{problems-and-risks}
+
+\subsubsection{Problems}\label{problems}
+
+\begin{itemize}
+    \item Limited time allocated to the project due to the workload of five subjects during the first semester.
+    \item Difficulties encountered while implementing Paddy’s .NET feedback project, caused by the removal of Visual Studio support for Apple Silicon laptops by Microsoft.
+    \item Challenges in developing my own feedback system, including dealing with deprecated files and unusual compilers, in addition to learning embedded systems programming in C++.
+    \item Issues with recording and managing a large volume of data due to the scale of data collection required.
+\end{itemize}
+
+
+\subsubsection{Risks}\label{risks}
+
+\begin{itemize}
+    \item Potential issues with data collection accuracy and reliability. \textbf{Mitigation:} Conduct a pilot test to identify and resolve any issues before full-scale data collection.
+    \item The amount of different wires and connections could prove difficult when testing users during the physical activity portion of my experiment. \textbf{Mitigation:} Conduct a pilot study to iron out any issues with experiment procedure and device location.
+    \item Challenges with producing bug-free code while implementing my version of electrotactile feedback using the ARM MBED device. \textbf{Mitigation:} Spend time over christmas holidays working on the development and utilize PlatformIO, as suggested by a colleague with prior experience working with MBED devices.
+
+\end{itemize}
+
+
+\subsection{Plan}\label{plan}
+\begin{itemize}
+    \item \textbf{Semester 2}
+    \begin{itemize}
+        \item \textbf{Week 1-2:} Conduct a pilot test with a working feedback system
+        \begin{itemize}
+            \item Deliverable: Implement a reliable system that provides differing levels of feedback and records data in an acceptable format. Conduct a pilot test to test my implementation
+        \end{itemize}
+        
+        \item \textbf{Week 3-5:} Implement changes based on feedback from the Pilot Test
+        \begin{itemize}
+            \item Deliverable: Make necessary changes and improvements based on the pilot test results, including adjustments to the interface and feedback mechanisms.
+        \end{itemize}
+        
+        \item \textbf{Week 6:} Conduct the first user test
+        \begin{itemize}
+            \item Deliverable: Gather data from the first user test to understand the relationship between skin conductivity and the level of electrotactile feedback perceived
+        \end{itemize}
+        
+        \item \textbf{Week 7-8:} Analyse the data collected from the first user test and conduct a second if data is inconclusive / have time
+        \begin{itemize}
+            \item Deliverable: Analyse the collected data using statistical tests as suggested by Euan. If the data is inconclusive, conduct a follow-up test or modify the testing methodology as needed. Or if I have some ideas about changing the test / testing in another way.
+        \end{itemize}
+        
+        \item \textbf{Week 9-10:} Write up
+        \begin{itemize}
+            \item Deliverable: Write the final report, Submit the first draft to the supervisor two weeks before the final deadline.
+        \end{itemize}
+    \end{itemize}
+\end{itemize}
+
+        
+    
+    
+    \end{document}

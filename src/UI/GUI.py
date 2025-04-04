@@ -30,7 +30,7 @@ class MainWindow(QMainWindow):
         self.serial_connection = Mbed_Connection(use_dummy=False) # dummy serial class for windows dev / testing set to false if connected
 
         self.widget = QWidget()
-        self.layout = QVBoxLayout(self.widget) # why is this not self
+        self.layout = QVBoxLayout(self.widget)
         self.layout.setSpacing(15)
 
         self.port_combo = QComboBox()
